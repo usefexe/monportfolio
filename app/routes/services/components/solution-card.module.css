@@ -1,0 +1,221 @@
+@layer components {
+
+  /* ─── Base card ──────────────────────────────────────────── */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--spaceXL);
+    background: color-mix(in lab, var(--text) 3%, transparent);
+    border: 1px solid color-mix(in lab, var(--text) 9%, transparent);
+    border-radius: 8px;
+    opacity: 0;
+    transform: translate3d(0, var(--space2XL), 0);
+    animation: cardIn var(--durationL) var(--bezierFastoutSlowin) var(--delay) forwards;
+    transition:
+      border-color var(--durationM) var(--bezierFastoutSlowin),
+      background var(--durationM) var(--bezierFastoutSlowin),
+      box-shadow var(--durationM) var(--bezierFastoutSlowin),
+      transform var(--durationM) var(--bezierFastoutSlowin);
+
+    @media (--mediaReduceMotion) {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    /* Desktop base padding */
+    @media (min-width: 1041px) {
+      padding: var(--space2XL);
+    }
+
+    /* ── Hover ── */
+    &:hover,
+    &:focus-within {
+      border-color: color-mix(in lab, var(--accent) 40%, transparent);
+      background: color-mix(in lab, var(--text) 5%, transparent);
+      box-shadow:
+        0 0 0 1px color-mix(in lab, var(--accent) 10%, transparent),
+        0 20px 60px -16px color-mix(in lab, var(--accent) 18%, transparent);
+
+      @media (--mediaUseMotion) {
+        transform: translate3d(0, -3px, 0);
+      }
+    }
+
+    &:hover .iconWrap,
+    &:focus-within .iconWrap {
+      border-color: color-mix(in lab, var(--accent) 50%, transparent);
+      color: var(--accent);
+
+      @media (--mediaUseMotion) {
+        transform: translateY(-2px);
+      }
+    }
+
+    &:hover .title,
+    &:focus-within .title {
+      color: var(--accent);
+    }
+  }
+
+  /* ─── Icon ───────────────────────────────────────────────── */
+  .iconWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    margin-bottom: var(--spaceL);
+    color: var(--textTitle);
+    background: transparent;
+    border: 1px solid color-mix(in lab, var(--text) 14%, transparent);
+    border-radius: 8px;
+    transition:
+      color var(--durationM) var(--bezierFastoutSlowin),
+      border-color var(--durationM) var(--bezierFastoutSlowin),
+      transform var(--durationS) var(--bezierFastoutSlowin);
+
+    @media (min-width: 1041px) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+
+    @media (min-width: 1041px) {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  /* ─── Typography ─────────────────────────────────────────── */
+  .title {
+    margin-bottom: var(--spaceS);
+    transition: color var(--durationM) var(--bezierFastoutSlowin);
+
+    @media (min-width: 1041px) {
+      margin-bottom: var(--spaceM);
+    }
+  }
+
+  .description {
+    line-height: var(--lineHeightBody);
+    margin-bottom: var(--spaceL);
+    flex: 1 0 auto;
+
+    @media (min-width: 1041px) {
+      margin-bottom: var(--spaceXL);
+    }
+  }
+
+  /* ─── Feature list — default (mobile & tablet) ───────────── */
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spaceS);
+    padding-top: var(--spaceL);
+    border-top: 1px solid color-mix(in lab, var(--text) 8%, transparent);
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: color-mix(in lab, var(--text) 55%, transparent);
+  }
+
+  .featureIcon {
+    flex: none;
+    color: var(--accent);
+    opacity: 0.65;
+  }
+
+  /* ─── Desktop pill variant for side & bottom cards ───────── */
+  @media (min-width: 1041px) {
+    .features:not(.featuresList) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--spaceXS) var(--spaceS);
+    }
+
+    .features:not(.featuresList) .feature {
+      background: color-mix(in lab, var(--text) 5%, transparent);
+      border: 1px solid color-mix(in lab, var(--text) 10%, transparent);
+      border-radius: 100px;
+      padding: 3px var(--spaceM);
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .features:not(.featuresList) .featureIcon {
+      width: 11px;
+      height: 11px;
+    }
+  }
+
+  /* ─── Featured card overrides (desktop only) ─────────────── */
+  @media (min-width: 1041px) {
+    .cardFeatured {
+      padding: var(--space2XL);
+
+      & .iconWrap {
+        width: 56px;
+        height: 56px;
+        margin-bottom: var(--space2XL);
+        border-radius: 10px;
+      }
+
+      & .icon {
+        width: 26px;
+        height: 26px;
+      }
+
+      & .title {
+        margin-bottom: var(--spaceL);
+      }
+
+      & .description {
+        margin-bottom: var(--space2XL);
+        max-width: 36ch;
+      }
+
+      /* Keep feature list vertical (not pills) in featured card */
+      & .features {
+        flex-direction: column;
+        gap: var(--spaceM);
+        padding-top: var(--spaceXL);
+      }
+
+      & .feature {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        gap: var(--spaceS);
+        white-space: normal;
+        color: color-mix(in lab, var(--text) 60%, transparent);
+      }
+
+      & .featureIcon {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  /* ─── Animation ──────────────────────────────────────────── */
+  @keyframes cardIn {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

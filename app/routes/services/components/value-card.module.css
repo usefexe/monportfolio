@@ -1,0 +1,36 @@
+@layer components {
+  .card {
+    padding: var(--spaceL) 0;
+    opacity: 0;
+    transform: translate3d(0, var(--spaceXL), 0);
+    animation: cardIn var(--durationL) var(--bezierFastoutSlowin) var(--delay) forwards;
+
+    @media (--mediaReduceMotion) {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: var(--spaceM);
+    color: var(--accent);
+  }
+
+  .title {
+    margin-bottom: var(--spaceS);
+  }
+
+  .description {
+    max-width: 320px;
+  }
+
+  @keyframes cardIn {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
