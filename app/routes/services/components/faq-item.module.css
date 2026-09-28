@@ -1,0 +1,54 @@
+@layer components {
+  .item {
+    border-bottom: 1px solid color-mix(in lab, var(--text) 12%, transparent);
+
+    &:first-child {
+      border-top: 1px solid color-mix(in lab, var(--text) 12%, transparent);
+    }
+  }
+
+  .trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spaceL);
+    width: 100%;
+    padding: var(--spaceL) 0;
+    background: none;
+    border: none;
+    text-align: start;
+    color: var(--textTitle);
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 4px;
+    }
+  }
+
+  .question {
+    color: var(--textTitle);
+  }
+
+  .chevron {
+    flex: none;
+    color: var(--textLight);
+    transition: transform var(--durationM) var(--bezierFastoutSlowin), color var(--durationM);
+
+    [data-open='true'] & {
+      color: var(--accent);
+      transform: rotate(180deg);
+    }
+  }
+
+  .content {
+    height: var(--contentHeight, 0px);
+    overflow: hidden;
+    transition: height var(--durationM) var(--bezierFastoutSlowin);
+  }
+
+  .contentInner {
+    padding-bottom: var(--spaceL);
+    max-width: var(--maxWidthM);
+  }
+}
